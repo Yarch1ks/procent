@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Калькулятор процентов</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Калькулятор процентов</h1>
+    
+        <div>
+            <h2>Сколько составляет % от числа</h2>
+            <label for="percent1">Процент:</label>
+            <input type="number" id="percent1" placeholder="Введите процент">
+    
+            <label for="number1">Число:</label>
+            <input type="number" id="number1" placeholder="Введите число">
+    
+            <button onclick="calculate(1)">ОК</button>
+            <div id="result1"></div>
+        </div>
+    
+        <div>
+            <h2>Сколько % составляет число</h2>
+            <label for="number2">Число:</label>
+            <input type="number" id="number2" placeholder="Введите число">
+    
+            <label for="number3">От числа:</label>
+            <input type="number" id="number3" placeholder="Введите число">
+    
+            <button onclick="calculate(2)">ОК</button>
+            <div id="result2"></div>
+        </div>
+    
+        <div>
+            <h2>Прибавить</h2>
+            <label for="percent4">Процент:</label>
+            <input type="number" id="percent4" placeholder="Введите процент">
+    
+            <label for="number4">Число:</label>
+            <input type="number" id="number4" placeholder="Введите число">
+    
+            <button onclick="calculate(3)">ОК</button>
+            <div id="result3"></div>
+        </div>
+    
+        <div>
+            <h2>Вычесть</h2>
+            <label for="percent5">Процент:</label>
+            <input type="number" id="percent5" placeholder="Введите процент">
+    
+            <label for="number5">Число:</label>
+            <input type="number" id="number5" placeholder="Введите число">
+    
+            <button onclick="calculate(4)">ОК</button>
+            <div id="result4"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculate(option) {
+            var percent, number;
+            var result = "";
+    
+            switch(option) {
+                case 1:
+                    percent = parseFloat(document.getElementById('percent1').value);
+                    number = parseFloat(document.getElementById('number1').value);
+                    break;
+                case 2:
+                    number = parseFloat(document.getElementById('number2').value);
+                    var fromNumber = parseFloat(document.getElementById('number3').value);
+                    percent = (number / fromNumber) * 100;
+                    break;
+                case 3:
+                    percent = parseFloat(document.getElementById('percent4').value);
+                    number = parseFloat(document.getElementById('number4').value);
+                    break;
+                case 4:
+                    percent = parseFloat(document.getElementById('percent5').value);
+                    number = parseFloat(document.getElementById('number5').value);
+                    break;
+                default:
+                    break;
+            }
+    
+            if (isNaN(percent) || isNaN(number)) {
+                result = "Пожалуйста, введите корректные числа.";
+            } else {
+                switch(option) {
+                    case 1:
+                        result = percent + "% от числа " + number + " = " + (percent / 100 * number).toFixed(2);
+                        break;
+                    case 2:
+                        result = "Число " + number + " от числа " + fromNumber + " = " + percent.toFixed(2) + "%";
+                        break;
+                    case 3:
+                        result = "Прибавить " + percent + "% к числу " + number + " = " + (number + percent / 100 * number).toFixed(2);
+                        break;
+                    case 4:
+                        result = "Вычесть " + percent + "% из числа " + number + " = " + (number - percent / 100 * number).toFixed(2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+    
+            document.getElementById('result' + option).innerHTML = result;
+        }
+    </script>
+
+</body>
+</html>
